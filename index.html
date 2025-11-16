@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memicking react code using DOM</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // initial state value
+      let state = {
+        count: 0,
+      };
+
+      // function to re-render the button component but not required in react
+      function buttonComponentReRender() {
+        const root = document.getElementById("root");
+        root.innerHTML = "";
+        root.appendChild(buttonComponent(state.count));
+      }
+
+      // click handler to update the state and re-render the button component
+      function onClickHandler() {
+        state.count += 1;
+        buttonComponentReRender(); // no need to call this in react
+      }
+
+      // button component to create a button element with count value
+      function buttonComponent(count) {
+        const button = document.createElement("button");
+        button.innerText = `Count : ${count}`;
+        button.setAttribute("onclick", `onClickHandler()`);
+        return button;
+      }
+
+      // initial render
+      buttonComponentReRender();
+    </script>
+  </body>
+</html>
